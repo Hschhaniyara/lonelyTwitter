@@ -1,3 +1,11 @@
+/**
+ * Lonely tweeter activity class runs the main application activity
+ *
+ * @author Harshal
+ * @see java.io
+ * @since 1.0
+ * @version 3
+ */
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -27,11 +35,11 @@ import com.google.gson.reflect.TypeToken;
 public class LonelyTwitterActivity extends Activity {
 
 	private static final String FILENAME = "file.sav";
-	private EditText bodyText;
-	private ListView oldTweetsList;
+	private EditText bodyText;			// text that user enters
+	private ListView oldTweetsList;		// view of all the tweets
 
-	ArrayList<Tweet> tweetList;
-	ArrayAdapter<Tweet> adapter;
+	ArrayList<Tweet> tweetList;			// list of all the tweets
+	ArrayAdapter<Tweet> adapter;		// notifys if data changes
 
 	/** Called when the activity is first created. */
 	@Override
@@ -45,6 +53,12 @@ public class LonelyTwitterActivity extends Activity {
 		Button clearButton = (Button) findViewById(R.id.clear);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
+		/**
+		 * method for save button
+		 * gets text that user enters, updates tweetList,
+		 * saves the tweetList in file and notifys adapter
+		 * @param v
+		 */
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -61,6 +75,11 @@ public class LonelyTwitterActivity extends Activity {
 			}
 		});
 
+		/**
+		 * method for clear button
+		 * clears the tweetList, updates tweetList in file and notifys adapter
+		 * @param v
+		 */
 		clearButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -73,6 +92,7 @@ public class LonelyTwitterActivity extends Activity {
 	}
 
 	@Override
+	/** on start of the activity sets the adapter */
 	protected void onStart() {
 		super.onStart();
 
@@ -85,6 +105,10 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 	}
 
+	/**
+	 * loads array from file
+	 * @throws FileNotFoundException
+	 */
 	private void loadFromFile() {
 //    ArrayList<String> tweets = new ArrayList<String>();
 		try {
@@ -104,7 +128,10 @@ public class LonelyTwitterActivity extends Activity {
 		}
 	}
 
-
+	/**
+	 * saves the list of array in file
+	 * @throws FileNotFoundException
+	 */
 	private void saveInFile() {
 		try {
 
